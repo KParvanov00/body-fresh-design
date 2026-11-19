@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Body Fresh Design – полиране, пастиране, автотенекеджийски услуги</title>
+<meta name="description" content="Полиране, пастиране и автотенекеджийски услуги от Body Fresh Design.">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0E1013;--panel:#171A1F;--ink:#F2F4F7;--muted:#9AA2AE;--acc:#3DF0B5;--line:#262B33;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Onest,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+h1,h2,h3{font-family:Unbounded,"Arial Black",Impact,sans-serif;line-height:1.1;margin:0}
+a{color:inherit}:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.nav b{font:700 15px Unbounded,sans-serif}.nav a{text-decoration:none;color:var(--muted);margin-left:20px;font-size:15px}.nav a:hover{color:var(--ink)}
+.hero{position:relative;overflow:hidden;padding-bottom:84px;background:radial-gradient(900px 420px at 85% -10%,#1d3a33 0%,transparent 60%),var(--bg)}
+.hero::after{content:"";position:absolute;right:-10%;top:30%;width:70%;height:34px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:rotate(-18deg);filter:blur(10px);opacity:.5}
+.hero h1{font-size:clamp(38px,8vw,92px);font-weight:700;margin-top:56px;max-width:11em}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p{max-width:32em;font-size:19px;color:var(--muted);margin:24px 0 32px}
+.btn{display:inline-block;background:var(--acc);color:#07120E;font-weight:600;padding:15px 28px;border-radius:999px;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+section{padding:72px 0}h2{font-size:clamp(26px,4.4vw,40px);margin-bottom:30px}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.svc div{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px}
+.svc h3{font-size:18px;margin-bottom:10px;color:var(--acc)}.svc p{margin:0;color:var(--muted)}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.gal figure{margin:0;background:var(--panel);border-radius:16px;overflow:hidden}
+.gal img{display:block;width:100%;height:220px;object-fit:cover}
+.gal figcaption{padding:12px 16px;color:var(--muted);font-size:15px}
+.contact{background:var(--panel);border-radius:32px 32px 0 0}
+.contact a.tel{font:700 clamp(24px,5vw,44px) Unbounded,sans-serif;color:var(--acc);text-decoration:none}
+.contact p{color:var(--muted);margin:10px 0 0}
+footer{background:var(--panel);color:var(--muted);font-size:14px;padding-bottom:26px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="hero"><div class="wrap">
+  <div class="nav"><b id="brand">Body Fresh Design</b><span><a href="#uslugi">Услуги</a><a href="#galeria" id="navg" hidden>Галерия</a><a href="#kontakt">Контакт</a></span></div>
+  <h1 id="tagline">Колата ви като нова.</h1>
+  <p id="intro"></p>
+  <a class="btn" id="call" href="#kontakt">Обадете се</a>
+</div></div>
+<section id="uslugi"><div class="wrap"><h2>Услуги</h2><div class="svc" id="services"></div></div></section>
+<section id="galeria" hidden><div class="wrap"><h2>Свършена работа</h2><div class="gal" id="gallery"></div></div></section>
+<section id="kontakt" class="contact"><div class="wrap"><h2>Свържете се с нас</h2>
+  <a class="tel" id="tel" href="#"></a><p id="address"></p><p id="hours"></p></div></section>
+<footer><div class="wrap">© <span id="foot">Body Fresh Design</span></div></footer>
+<script>
+fetch('content/site.json').then(function(r){return r.json()}).then(function(d){
+  function t(id,v){var e=document.getElementById(id);if(e&&v)e.textContent=v}
+  t('brand',d.title);t('foot',d.title);t('tagline',d.tagline);t('intro',d.intro);
+  t('address',d.address);t('hours',d.hours);t('tel',d.phone);
+  if(d.title)document.title=d.title+' – полиране, пастиране, автотенекеджийски услуги';
+  var tel=(d.phone||'').replace(/[^+\d]/g,'');
+  if(tel){document.getElementById('tel').href='tel:'+tel;document.getElementById('call').href='tel:'+tel}
+  var s=document.getElementById('services');
+  (d.services||[]).forEach(function(x){var b=document.createElement('div'),h=document.createElement('h3'),p=document.createElement('p');h.textContent=x.name;p.textContent=x.text;b.append(h,p);s.append(b)});
+  var g=document.getElementById('gallery');
+  (d.gallery||[]).forEach(function(x){if(!x.image)return;var f=document.createElement('figure'),i=document.createElement('img'),c=document.createElement('figcaption');i.src=x.image;i.alt=x.caption||'';i.loading='lazy';c.textContent=x.caption||'';f.append(i);if(x.caption)f.append(c);g.append(f)});
+  if(g.children.length){document.getElementById('galeria').hidden=false;document.getElementById('navg').hidden=false}
+}).catch(function(){});
+</script>
+</body>
+</html>
