@@ -1,0 +1,35 @@
+backend:
+  name: github
+  repo: KParvanov00/body-fresh-design
+  branch: main
+media_folder: images/uploads
+public_folder: /images/uploads
+locale: bg
+collections:
+  - name: site
+    label: Сайт
+    files:
+      - name: main
+        label: Съдържание на сайта
+        file: content/site.json
+        format: json
+        fields:
+          - { name: title, label: Име на фирмата, widget: string }
+          - { name: tagline, label: Заглавие на първата страница, widget: string }
+          - { name: intro, label: Кратко представяне, widget: text }
+          - { name: phone, label: Телефон, widget: string }
+          - { name: address, label: Адрес, widget: string }
+          - { name: hours, label: Работно време, widget: string }
+          - name: services
+            label: Услуги
+            widget: list
+            fields:
+              - { name: name, label: Име на услугата, widget: string }
+              - { name: text, label: Описание, widget: text }
+          - name: gallery
+            label: Галерия със снимки
+            widget: list
+            required: false
+            fields:
+              - { name: image, label: Снимка, widget: image }
+              - { name: caption, label: Надпис, widget: string, required: false }
